@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20160622 12:37:41.870" generator="Robot 3.0 (Python 2.7.8 on win32)">
+<suite source="C:\Users\v_kazankov\PycharmProjects\TestTolshinometria\integrationtest\Tests\AvoObjects.robot" id="s1" name="AvoObjects">
+<kw type="setup" name="session" library="AvoKeywords">
+<kw name="Create Ntlm Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>${server}</arg>
+<arg>${domain}</arg>
+</arguments>
+<status status="PASS" endtime="20160622 12:37:45.697" starttime="20160622 12:37:45.670"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:37:45.698" starttime="20160622 12:37:45.669"></status>
+</kw>
+<test id="s1-t1" name="Authorization">
+<kw name="Given session" library="AvoKeywords">
+<kw name="Create Ntlm Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>${server}</arg>
+<arg>${domain}</arg>
+</arguments>
+<status status="PASS" endtime="20160622 12:37:45.701" starttime="20160622 12:37:45.700"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:37:45.702" starttime="20160622 12:37:45.699"></status>
+</kw>
+<kw name="When Login" library="AvoKeywords">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>Content-Type</arg>
+<arg>application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20160622 12:37:45.703" level="WARN">Giving keys and values separately to 'Create Dictionary' keyword is deprecated. Use 'key=value' syntax instead.</msg>
+<msg timestamp="20160622 12:37:45.704" level="INFO">${headers} = {u'Content-Type': u'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" endtime="20160622 12:37:45.704" starttime="20160622 12:37:45.703"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>p_cpwd=NTQxNkQ3Q0Q2RUYxOTVBMEY3NjIyQTlDNTZCNTVFODQ=</arg>
+<arg>p_nssid=29510699994</arg>
+<arg>p_clogin=lena</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20160622 12:37:45.706" level="INFO">${data} = {u'p_cpwd': u'NTQxNkQ3Q0Q2RUYxOTVBMEY3NjIyQTlDNTZCNTVFODQ=', u'p_nssid': u'29510699994', u'p_clogin': u'lena'}</msg>
+<status status="PASS" endtime="20160622 12:37:45.706" starttime="20160622 12:37:45.705"></status>
+</kw>
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/</arg>
+</arguments>
+<msg timestamp="20160622 12:37:50.351" level="INFO">Starting new HTTP connection (1): 127.0.0.1</msg>
+<msg timestamp="20160622 12:37:59.483" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<status status="PASS" endtime="20160622 12:37:59.919" starttime="20160622 12:37:45.706"></status>
+</kw>
+<kw name="Post" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/fl/auth</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:38:04.428" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:04.498" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:04.498" starttime="20160622 12:37:59.920"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${resp}</arg>
+<arg>${resp}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:04.501" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:04.501" starttime="20160622 12:38:04.499"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:04.501" starttime="20160622 12:37:45.702"></status>
+</kw>
+<kw name="Then login is correct" library="AvoKeywords">
+<kw name="Should Not Contain" library="BuiltIn">
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<arguments>
+<arg>${resp.url}</arg>
+<arg>/fl/main</arg>
+</arguments>
+<status status="PASS" endtime="20160622 12:38:04.504" starttime="20160622 12:38:04.503"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:04.505" starttime="20160622 12:38:04.502"></status>
+</kw>
+<doc>Loging of user to system</doc>
+<tags>
+<tag>Smoke</tag>
+</tags>
+<status status="PASS" endtime="20160622 12:38:04.505" critical="yes" starttime="20160622 12:37:45.698"></status>
+</test>
+<test id="s1-t2" name="GetFullTree">
+<kw name="Given HomePageThickness" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>//TM/TM.jsp</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:38:09.017" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:09.038" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:09.038" starttime="20160622 12:38:04.509"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:09.039" starttime="20160622 12:38:04.508"></status>
+</kw>
+<kw name="When TakeBody" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?inType=2&amp;subsystem=${subsystemKey}&amp;isCompress=0&amp;inSQL=gmt_mapd.TM_API.getFullTree</arg>
+</arguments>
+<assign>
+<var>${getRequestFullTree}</var>
+</assign>
+<msg timestamp="20160622 12:38:13.546" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:15.187" level="INFO">${getRequestFullTree} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:15.188" starttime="20160622 12:38:09.041"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getRequestFullTree}</arg>
+</arguments>
+<assign>
+<var>${body_text}</var>
+</assign>
+<msg timestamp="20160622 12:38:15.194" level="INFO">${body_text} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NNODEKEY&gt;15000&lt;/NNODEKEY&gt;
+  &lt;NID&gt;1&lt;/NID&gt;
+  &lt;NLEVEL&gt;1&lt;/NLEVEL&gt;
+  &lt;CNAME&gt;КС Заполярная (ГКС)&lt;/CNAME&gt;
+  &lt;NVALUE1&gt;70083855279947&lt;/NVALUE1&gt;
+  &lt;...</msg>
+<status status="PASS" endtime="20160622 12:38:15.194" starttime="20160622 12:38:15.188"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${body_text}</arg>
+<arg>${body_text}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:15.204" level="INFO">${body_text} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NNODEKEY&gt;15000&lt;/NNODEKEY&gt;
+  &lt;NID&gt;1&lt;/NID&gt;
+  &lt;NLEVEL&gt;1&lt;/NLEVEL&gt;
+  &lt;CNAME&gt;КС Заполярная (ГКС)&lt;/CNAME&gt;
+  &lt;NVALUE1&gt;70083855279947&lt;/NVALUE1&gt;
+  &lt;...</msg>
+<status status="PASS" endtime="20160622 12:38:15.205" starttime="20160622 12:38:15.195"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:15.205" starttime="20160622 12:38:09.040"></status>
+</kw>
+<kw name="Then CountElementsTrue more" library="AvoKeywords">
+<kw name="Assert Elements Count" library="TestMethodList">
+<arguments>
+<arg>${body_text}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:15.283" level="INFO">//CNAME/text()</msg>
+<status status="PASS" endtime="20160622 12:38:15.283" starttime="20160622 12:38:15.207"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:15.283" starttime="20160622 12:38:15.206"></status>
+</kw>
+<doc>Verify that object count is correct in tree</doc>
+<status status="PASS" endtime="20160622 12:38:15.284" critical="yes" starttime="20160622 12:38:04.506"></status>
+</test>
+<test id="s1-t3" name="GetDeviceMeasurement">
+<kw name="Given HomePageThickness" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>//TM/TM.jsp</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:38:19.795" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:19.814" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:19.814" starttime="20160622 12:38:15.289"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:19.815" starttime="20160622 12:38:15.288"></status>
+</kw>
+<kw name="When GetMeasuring device" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?subsystem=${subsystemKey}&amp;inType=2&amp;isCompress=0&amp;inSQL=gmt_mapd.TM_API.getDeviceMeasurement()</arg>
+</arguments>
+<assign>
+<var>${getListDeviseMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:38:24.323" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:24.358" level="INFO">${getListDeviseMeasurement} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:24.358" starttime="20160622 12:38:19.817"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getListDeviseMeasurement}</arg>
+</arguments>
+<assign>
+<var>${bodyTextListDevise}</var>
+</assign>
+<msg timestamp="20160622 12:38:24.361" level="INFO">${bodyTextListDevise} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NKEY&gt;71838847439948&lt;/NKEY&gt;
+  &lt;CNAME&gt;ИПИ  ParZ 21G зав№ 12345678 &lt;/CNAME&gt;
+ &lt;/R&gt;
+ &lt;R&gt;
+  &lt;NKEY&gt;10535762559959&lt;/NKEY&gt;
+  &lt;CNAME&gt;ИПИ  ПАУТ зав№ ...</msg>
+<status status="PASS" endtime="20160622 12:38:24.361" starttime="20160622 12:38:24.359"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${bodyTextListDevise}</arg>
+<arg>${bodyTextListDevise}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:24.363" level="INFO">${bodyTextListDevise} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NKEY&gt;71838847439948&lt;/NKEY&gt;
+  &lt;CNAME&gt;ИПИ  ParZ 21G зав№ 12345678 &lt;/CNAME&gt;
+ &lt;/R&gt;
+ &lt;R&gt;
+  &lt;NKEY&gt;10535762559959&lt;/NKEY&gt;
+  &lt;CNAME&gt;ИПИ  ПАУТ зав№ ...</msg>
+<status status="PASS" endtime="20160622 12:38:24.364" starttime="20160622 12:38:24.362"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:24.364" starttime="20160622 12:38:19.816"></status>
+</kw>
+<kw name="Then Measuring devices more null" library="AvoKeywords">
+<kw name="Assert Is Object" library="TestMethodList">
+<arguments>
+<arg>${bodyTextListDevise}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:24.387" level="INFO">28</msg>
+<status status="PASS" endtime="20160622 12:38:24.388" starttime="20160622 12:38:24.366"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:24.388" starttime="20160622 12:38:24.365"></status>
+</kw>
+<doc>Verify that measuring device &gt; 0 when create new measurement</doc>
+<status status="PASS" endtime="20160622 12:38:24.389" critical="yes" starttime="20160622 12:38:15.285"></status>
+</test>
+<test id="s1-t4" name="GetBendListWithMeasuresForAVO">
+<kw name="Given HomePageThickness" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>//TM/TM.jsp</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:38:28.903" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:28.921" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:28.921" starttime="20160622 12:38:24.393"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:28.922" starttime="20160622 12:38:24.392"></status>
+</kw>
+<kw name="When GetListBendsAVO" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?subsystem=${subsystemKey}&amp;inType=2&amp;isCompress=0&amp;inSQL=gmt_mapd.TM_API.getBendListWithMeasurement(10511120139959,6,-1)</arg>
+</arguments>
+<assign>
+<var>${getListBendsObjects}</var>
+</assign>
+<msg timestamp="20160622 12:38:33.429" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:33.927" level="INFO">${getListBendsObjects} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:33.927" starttime="20160622 12:38:28.924"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getListBendsObjects}</arg>
+</arguments>
+<assign>
+<var>${bodyTextListBends}</var>
+</assign>
+<msg timestamp="20160622 12:38:33.929" level="INFO">${bodyTextListBends} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NBENDKEY&gt;10537490769959&lt;/NBENDKEY&gt;
+  &lt;COBJECTNAME&gt;1&lt;/COBJECTNAME&gt;
+  &lt;CSECTIONNAME&gt;Входной трубопровод АВО 1/2&lt;/CSECTIONNAME&gt;
+  &lt;CBENDNUM&gt;1...</msg>
+<status status="PASS" endtime="20160622 12:38:33.930" starttime="20160622 12:38:33.928"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${bodyTextListBends}</arg>
+<arg>${bodyTextListBends}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:33.932" level="INFO">${bodyTextListBends} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NBENDKEY&gt;10537490769959&lt;/NBENDKEY&gt;
+  &lt;COBJECTNAME&gt;1&lt;/COBJECTNAME&gt;
+  &lt;CSECTIONNAME&gt;Входной трубопровод АВО 1/2&lt;/CSECTIONNAME&gt;
+  &lt;CBENDNUM&gt;1...</msg>
+<status status="PASS" endtime="20160622 12:38:33.932" starttime="20160622 12:38:33.930"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:33.933" starttime="20160622 12:38:28.923"></status>
+</kw>
+<kw name="Then Bend objects more null" library="AvoKeywords">
+<kw name="Assert Is Object" library="TestMethodList">
+<arguments>
+<arg>${bodyTextListBends}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:33.937" level="INFO">24</msg>
+<status status="PASS" endtime="20160622 12:38:33.938" starttime="20160622 12:38:33.935"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:33.938" starttime="20160622 12:38:33.933"></status>
+</kw>
+<doc>Verify that bends &gt; 0 when create new measurement AVO type</doc>
+<status status="PASS" endtime="20160622 12:38:33.939" critical="yes" starttime="20160622 12:38:24.390"></status>
+</test>
+<test id="s1-t5" name="SaveNewMeasurementToMeasurementListForAVO">
+<kw name="Given HomePageThickness" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>//TM/TM.jsp</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:38:38.448" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:38.662" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:38.662" starttime="20160622 12:38:33.943"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:38.663" starttime="20160622 12:38:33.942"></status>
+</kw>
+<kw name="When GetCountMeasurementInList" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?inSQL=gmt_mapd.TM_API.getMeasurementList(10511120139959,6)&amp;subsystem=${subsystemKey}&amp;isCompress=0&amp;inType=2</arg>
+</arguments>
+<assign>
+<var>${getMeasurementListAvo}</var>
+</assign>
+<msg timestamp="20160622 12:38:43.173" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:43.194" level="INFO">${getMeasurementListAvo} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:43.195" starttime="20160622 12:38:38.665"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getMeasurementListAvo}</arg>
+</arguments>
+<assign>
+<var>${bodyTextMeasurementList}</var>
+</assign>
+<msg timestamp="20160622 12:38:43.197" level="INFO">${bodyTextMeasurementList} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NMEASUREMENTKEY&gt;71854153159948&lt;/NMEASUREMENTKEY&gt;
+  &lt;NCONTROLDATE&gt;1464660000&lt;/NCONTROLDATE&gt;
+  &lt;CWORKCARRIEDOUT&gt;Терефера Е. А.&lt;/CWORKCARRIED...</msg>
+<status status="PASS" endtime="20160622 12:38:43.197" starttime="20160622 12:38:43.196"></status>
+</kw>
+<kw name="Get Count Measurement" library="TestMethodList">
+<arguments>
+<arg>${bodyTextMeasurementList}</arg>
+</arguments>
+<assign>
+<var>${countMeasurementsInList}</var>
+</assign>
+<msg timestamp="20160622 12:38:43.199" level="INFO">2</msg>
+<msg timestamp="20160622 12:38:43.199" level="INFO">${countMeasurementsInList} = 2</msg>
+<status status="PASS" endtime="20160622 12:38:43.199" starttime="20160622 12:38:43.198"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:43.201" level="INFO">${countMeasurementsInList} = 2</msg>
+<status status="PASS" endtime="20160622 12:38:43.201" starttime="20160622 12:38:43.200"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:43.201" starttime="20160622 12:38:38.664"></status>
+</kw>
+<kw name="Get Variable Value" library="BuiltIn">
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<assign>
+<var>${oldList}</var>
+</assign>
+<msg timestamp="20160622 12:38:43.202" level="INFO">${oldList} = 2</msg>
+<status status="PASS" endtime="20160622 12:38:43.202" starttime="20160622 12:38:43.201"></status>
+</kw>
+<kw name="And SendDataNewMeasurement" library="AvoKeywords">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>inSQL=gmt_mapd.TM_API.modifyMeasurement(${nMeasurementKeyNew},${nObjectKey},${nTypeKey},${nControlData},'${cWorkCarriedOut}',${nMeasureDeviceKey},'${cParametersNew}')</arg>
+<arg>isCompress=0</arg>
+<arg>inType=2</arg>
+<arg>subsystem=${subsystemKey}</arg>
+</arguments>
+<assign>
+<var>${saveDataMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:38:43.205" level="INFO">${saveDataMeasurement} = {u'inSQL': u"gmt_mapd.TM_API.modifyMeasurement(-1,10511120139959,6,1462068000,'auto-test',10535762559959,'10537490769959;1__;3__;__;_5_;__|10537490759959;_2_;__;_4_;__;_6_')", u'isCompress': u'0', u'i...</msg>
+<status status="PASS" endtime="20160622 12:38:43.205" starttime="20160622 12:38:43.203"></status>
+</kw>
+<kw name="Post" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql</arg>
+<arg>data=${saveDataMeasurement}</arg>
+</arguments>
+<assign>
+<var>${resultSaveMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:38:47.715" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:48.285" level="INFO">${resultSaveMeasurement} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:48.285" starttime="20160622 12:38:43.206"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${resultSaveMeasurement}</arg>
+</arguments>
+<assign>
+<var>${textResponseHTML}</var>
+</assign>
+<msg timestamp="20160622 12:38:48.287" level="INFO">${textResponseHTML} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;res&gt;71854809209948&lt;/res&gt;
+ &lt;/R&gt;
+&lt;/ROWSET&gt;
+</msg>
+<status status="PASS" endtime="20160622 12:38:48.287" starttime="20160622 12:38:48.286"></status>
+</kw>
+<kw name="Get Number Measurement" library="TestMethodList">
+<arguments>
+<arg>${textResponseHTML}</arg>
+</arguments>
+<assign>
+<var>${numberNewMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:38:48.289" level="INFO">//res/text()</msg>
+<msg timestamp="20160622 12:38:48.290" level="INFO">${numberNewMeasurement} = 71854809209948</msg>
+<status status="PASS" endtime="20160622 12:38:48.290" starttime="20160622 12:38:48.288"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${numberNewMeasurement}</arg>
+<arg>${numberNewMeasurement}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:48.292" level="INFO">${numberNewMeasurement} = 71854809209948</msg>
+<status status="PASS" endtime="20160622 12:38:48.293" starttime="20160622 12:38:48.291"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:48.293" starttime="20160622 12:38:43.203"></status>
+</kw>
+<kw name="And GetCountMeasurementInList" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?inSQL=gmt_mapd.TM_API.getMeasurementList(10511120139959,6)&amp;subsystem=${subsystemKey}&amp;isCompress=0&amp;inType=2</arg>
+</arguments>
+<assign>
+<var>${getMeasurementListAvo}</var>
+</assign>
+<msg timestamp="20160622 12:38:52.801" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:52.821" level="INFO">${getMeasurementListAvo} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:52.822" starttime="20160622 12:38:48.295"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getMeasurementListAvo}</arg>
+</arguments>
+<assign>
+<var>${bodyTextMeasurementList}</var>
+</assign>
+<msg timestamp="20160622 12:38:52.824" level="INFO">${bodyTextMeasurementList} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NMEASUREMENTKEY&gt;71854153159948&lt;/NMEASUREMENTKEY&gt;
+  &lt;NCONTROLDATE&gt;1464660000&lt;/NCONTROLDATE&gt;
+  &lt;CWORKCARRIEDOUT&gt;Терефера Е. А.&lt;/CWORKCARRIED...</msg>
+<status status="PASS" endtime="20160622 12:38:52.824" starttime="20160622 12:38:52.822"></status>
+</kw>
+<kw name="Get Count Measurement" library="TestMethodList">
+<arguments>
+<arg>${bodyTextMeasurementList}</arg>
+</arguments>
+<assign>
+<var>${countMeasurementsInList}</var>
+</assign>
+<msg timestamp="20160622 12:38:52.826" level="INFO">3</msg>
+<msg timestamp="20160622 12:38:52.826" level="INFO">${countMeasurementsInList} = 3</msg>
+<status status="PASS" endtime="20160622 12:38:52.826" starttime="20160622 12:38:52.824"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<msg timestamp="20160622 12:38:52.828" level="INFO">${countMeasurementsInList} = 3</msg>
+<status status="PASS" endtime="20160622 12:38:52.829" starttime="20160622 12:38:52.827"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:52.829" starttime="20160622 12:38:48.294"></status>
+</kw>
+<kw name="Get Variable Value" library="BuiltIn">
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<assign>
+<var>${newList}</var>
+</assign>
+<msg timestamp="20160622 12:38:52.831" level="INFO">${newList} = 3</msg>
+<status status="PASS" endtime="20160622 12:38:52.831" starttime="20160622 12:38:52.830"></status>
+</kw>
+<kw name="Then New measurement added to list" library="AvoKeywords">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newList}' &gt; '${oldList}'</arg>
+<arg>log to console</arg>
+<arg>\nNew measurement added to list</arg>
+</arguments>
+<status status="PASS" endtime="20160622 12:38:52.839" starttime="20160622 12:38:52.833"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:52.839" starttime="20160622 12:38:52.832"></status>
+</kw>
+<doc>Add measurement</doc>
+<status status="PASS" endtime="20160622 12:38:52.840" critical="yes" starttime="20160622 12:38:33.940"></status>
+</test>
+<test id="s1-t6" name="EditMeasurementInAvoList">
+<kw name="Given HomePageThickness" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>//TM/TM.jsp</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:38:57.354" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:38:57.378" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:38:57.379" starttime="20160622 12:38:52.843"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:38:57.379" starttime="20160622 12:38:52.842"></status>
+</kw>
+<kw name="When EditNewDataForMeasurement" library="AvoKeywords">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>inSQL=gmt_mapd.TM_API.modifyMeasurement(${numberNewMeasurement},${nObjectKey},${nTypeKey},${nControlData},'${cWorkCarriedOutEdit}',${nMeasureDeviceKey},'${cParametersEdit}')</arg>
+<arg>isCompress=0</arg>
+<arg>inType=2</arg>
+<arg>subsystem=${subsystemKey}</arg>
+</arguments>
+<assign>
+<var>${updateDataMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:38:57.385" level="INFO">${updateDataMeasurement} = {u'inSQL': u"gmt_mapd.TM_API.modifyMeasurement(71854809209948,10511120139959,6,1462068000,'auto-test-edit',10535762559959,'10537490769959;11__;33__;__;_55_;__|10537490759959;_22_;__;_44_;__;_66_')", u...</msg>
+<status status="PASS" endtime="20160622 12:38:57.385" starttime="20160622 12:38:57.381"></status>
+</kw>
+<kw name="Post" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql</arg>
+<arg>data=${updateDataMeasurement}</arg>
+</arguments>
+<assign>
+<var>${resultUpdateMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:39:01.892" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:39:01.997" level="INFO">${resultUpdateMeasurement} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:39:01.997" starttime="20160622 12:38:57.386"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${resultUpdateMeasurement}</arg>
+</arguments>
+<assign>
+<var>${textResponseHTML}</var>
+</assign>
+<msg timestamp="20160622 12:39:02.000" level="INFO">${textResponseHTML} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;res&gt;71854809209948&lt;/res&gt;
+ &lt;/R&gt;
+&lt;/ROWSET&gt;
+</msg>
+<status status="PASS" endtime="20160622 12:39:02.000" starttime="20160622 12:39:01.997"></status>
+</kw>
+<kw name="Get Number Measurement" library="TestMethodList">
+<arguments>
+<arg>${textResponseHTML}</arg>
+</arguments>
+<assign>
+<var>${numberUpdateMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:39:02.002" level="INFO">//res/text()</msg>
+<msg timestamp="20160622 12:39:02.003" level="INFO">${numberUpdateMeasurement} = 71854809209948</msg>
+<status status="PASS" endtime="20160622 12:39:02.003" starttime="20160622 12:39:02.001"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${numberUpdateMeasurement}</arg>
+<arg>${numberUpdateMeasurement}</arg>
+</arguments>
+<msg timestamp="20160622 12:39:02.005" level="INFO">${numberUpdateMeasurement} = 71854809209948</msg>
+<status status="PASS" endtime="20160622 12:39:02.005" starttime="20160622 12:39:02.003"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:02.006" starttime="20160622 12:38:57.380"></status>
+</kw>
+<kw name="Then MeasurementIsUpdate" library="AvoKeywords">
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${numberUpdateMeasurement}</arg>
+</arguments>
+<msg timestamp="20160622 12:39:02.008" level="INFO">Length is 14</msg>
+<status status="PASS" endtime="20160622 12:39:02.009" starttime="20160622 12:39:02.008"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:02.009" starttime="20160622 12:39:02.006"></status>
+</kw>
+<doc>Update measurement</doc>
+<status status="PASS" endtime="20160622 12:39:02.010" critical="yes" starttime="20160622 12:38:52.840"></status>
+</test>
+<test id="s1-t7" name="DeleteMeasurementInAvoList">
+<kw name="Given HomePageThickness" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>//TM/TM.jsp</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20160622 12:39:06.521" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:39:06.539" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:39:06.540" starttime="20160622 12:39:02.012"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:06.540" starttime="20160622 12:39:02.011"></status>
+</kw>
+<kw name="When GetCountMeasurementInList" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?inSQL=gmt_mapd.TM_API.getMeasurementList(10511120139959,6)&amp;subsystem=${subsystemKey}&amp;isCompress=0&amp;inType=2</arg>
+</arguments>
+<assign>
+<var>${getMeasurementListAvo}</var>
+</assign>
+<msg timestamp="20160622 12:39:11.050" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:39:11.073" level="INFO">${getMeasurementListAvo} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:39:11.073" starttime="20160622 12:39:06.542"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getMeasurementListAvo}</arg>
+</arguments>
+<assign>
+<var>${bodyTextMeasurementList}</var>
+</assign>
+<msg timestamp="20160622 12:39:11.075" level="INFO">${bodyTextMeasurementList} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NMEASUREMENTKEY&gt;71854153159948&lt;/NMEASUREMENTKEY&gt;
+  &lt;NCONTROLDATE&gt;1464660000&lt;/NCONTROLDATE&gt;
+  &lt;CWORKCARRIEDOUT&gt;Терефера Е. А.&lt;/CWORKCARRIED...</msg>
+<status status="PASS" endtime="20160622 12:39:11.075" starttime="20160622 12:39:11.073"></status>
+</kw>
+<kw name="Get Count Measurement" library="TestMethodList">
+<arguments>
+<arg>${bodyTextMeasurementList}</arg>
+</arguments>
+<assign>
+<var>${countMeasurementsInList}</var>
+</assign>
+<msg timestamp="20160622 12:39:11.077" level="INFO">3</msg>
+<msg timestamp="20160622 12:39:11.077" level="INFO">${countMeasurementsInList} = 3</msg>
+<status status="PASS" endtime="20160622 12:39:11.077" starttime="20160622 12:39:11.075"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<msg timestamp="20160622 12:39:11.080" level="INFO">${countMeasurementsInList} = 3</msg>
+<status status="PASS" endtime="20160622 12:39:11.080" starttime="20160622 12:39:11.078"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:11.081" starttime="20160622 12:39:06.541"></status>
+</kw>
+<kw name="Get Variable Value" library="BuiltIn">
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<assign>
+<var>${oldList}</var>
+</assign>
+<msg timestamp="20160622 12:39:11.082" level="INFO">${oldList} = 3</msg>
+<status status="PASS" endtime="20160622 12:39:11.083" starttime="20160622 12:39:11.081"></status>
+</kw>
+<kw name="And DeleteMeasurement" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?inSQL=gmt_mapd.TM_API.dropMeasurement(${numberUpdateMeasurement})&amp;inType=2&amp;subsystem=${subsystemKey}&amp;isCompress=0</arg>
+</arguments>
+<assign>
+<var>${numberDeletedMeasurement}</var>
+</assign>
+<msg timestamp="20160622 12:39:15.594" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:39:15.689" level="INFO">${numberDeletedMeasurement} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:39:15.689" starttime="20160622 12:39:11.084"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${numberDeletedMeasurement}</arg>
+</arguments>
+<msg timestamp="20160622 12:39:15.691" level="INFO">&lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:39:15.691" starttime="20160622 12:39:15.690"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:15.692" starttime="20160622 12:39:11.083"></status>
+</kw>
+<kw name="And GetCountMeasurementInList" library="AvoKeywords">
+<kw name="Get" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>urlTol</arg>
+<arg>/orawci/v6/getxmlbysql?inSQL=gmt_mapd.TM_API.getMeasurementList(10511120139959,6)&amp;subsystem=${subsystemKey}&amp;isCompress=0&amp;inType=2</arg>
+</arguments>
+<assign>
+<var>${getMeasurementListAvo}</var>
+</assign>
+<msg timestamp="20160622 12:39:20.201" level="INFO">Resetting dropped connection: 127.0.0.1</msg>
+<msg timestamp="20160622 12:39:20.222" level="INFO">${getMeasurementListAvo} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20160622 12:39:20.222" starttime="20160622 12:39:15.693"></status>
+</kw>
+<kw name="Get Body Text" library="TestMethodList">
+<arguments>
+<arg>${getMeasurementListAvo}</arg>
+</arguments>
+<assign>
+<var>${bodyTextMeasurementList}</var>
+</assign>
+<msg timestamp="20160622 12:39:20.224" level="INFO">${bodyTextMeasurementList} = &lt;?xml version="1.0"?&gt;
+&lt;ROWSET&gt;
+ &lt;Result&gt;True&lt;/Result&gt;
+ &lt;R&gt;
+  &lt;NMEASUREMENTKEY&gt;71854153159948&lt;/NMEASUREMENTKEY&gt;
+  &lt;NCONTROLDATE&gt;1464660000&lt;/NCONTROLDATE&gt;
+  &lt;CWORKCARRIEDOUT&gt;Терефера Е. А.&lt;/CWORKCARRIED...</msg>
+<status status="PASS" endtime="20160622 12:39:20.225" starttime="20160622 12:39:20.223"></status>
+</kw>
+<kw name="Get Count Measurement" library="TestMethodList">
+<arguments>
+<arg>${bodyTextMeasurementList}</arg>
+</arguments>
+<assign>
+<var>${countMeasurementsInList}</var>
+</assign>
+<msg timestamp="20160622 12:39:20.227" level="INFO">2</msg>
+<msg timestamp="20160622 12:39:20.227" level="INFO">${countMeasurementsInList} = 2</msg>
+<status status="PASS" endtime="20160622 12:39:20.227" starttime="20160622 12:39:20.225"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<msg timestamp="20160622 12:39:20.229" level="INFO">${countMeasurementsInList} = 2</msg>
+<status status="PASS" endtime="20160622 12:39:20.230" starttime="20160622 12:39:20.228"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:20.230" starttime="20160622 12:39:15.692"></status>
+</kw>
+<kw name="Get Variable Value" library="BuiltIn">
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<arguments>
+<arg>${countMeasurementsInList}</arg>
+</arguments>
+<assign>
+<var>${newList}</var>
+</assign>
+<msg timestamp="20160622 12:39:20.232" level="INFO">${newList} = 2</msg>
+<status status="PASS" endtime="20160622 12:39:20.232" starttime="20160622 12:39:20.231"></status>
+</kw>
+<kw name="Then MeasurementDeletedFromList" library="AvoKeywords">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newList}' &lt; '${oldList}'</arg>
+<arg>log to console</arg>
+<arg>\nMeasurement deleted from list</arg>
+</arguments>
+<status status="PASS" endtime="20160622 12:39:20.238" starttime="20160622 12:39:20.234"></status>
+</kw>
+<status status="PASS" endtime="20160622 12:39:20.239" starttime="20160622 12:39:20.233"></status>
+</kw>
+<doc>Deleted measurement</doc>
+<status status="PASS" endtime="20160622 12:39:20.239" critical="yes" starttime="20160622 12:39:02.010"></status>
+</test>
+<doc>Suite testing add, edit and delete measurement in AVO list</doc>
+<status status="PASS" endtime="20160622 12:39:20.244" starttime="20160622 12:37:41.936"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="7">Critical Tests</stat>
+<stat fail="0" pass="7">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">Smoke</stat>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="AvoObjects" pass="7">AvoObjects</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20160622 12:37:45.703" level="WARN">Giving keys and values separately to 'Create Dictionary' keyword is deprecated. Use 'key=value' syntax instead.</msg>
+</errors>
+</robot>
